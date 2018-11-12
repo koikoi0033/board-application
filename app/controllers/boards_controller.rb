@@ -1,7 +1,11 @@
 class BoardsController < ApplicationController
+
+  # 共通メソッドのbefore_action
+  before_action :set_target_board, only: %i[show edit update destroy]
+
   # 掲示板一覧画面
   def index
-    @boards = Board.all
+    @boards = Board.page(params[:page])
   end
 
   # 掲示板新規登録画面
@@ -18,32 +22,33 @@ class BoardsController < ApplicationController
 
   # 掲示板詳細画面
   def show
-    @board = Board.find(params[:id])
   end
 
   # 掲示板編集画面
   def edit
-    @board = Board.find(params[:id])
   end
 
   # 掲示板編集画面の更新処理
   def update
-    board = Board.find(params[:id])
-    board.update(board_params)
-    redirect_to board
+    @board.update(board_params)
+    redirect_to @board
   end
 
   # 掲示板削除機能
   def destroy
-    board = Board.find(params[:id])
-    board.delete
+    @board.delete
     
     redirect_to boards_path
   end
 
-  # パラメータを特定のキーにフィルタリング
   private
+
   def board_params
     params.require(:board).permit(:name, :title, :body)
+  end
+
+  #　対象の掲示板データを取得する
+  def set_target_board
+    @board = Board.find(params[:id])
   end
 end
