@@ -1,14 +1,18 @@
 ja:
   activerecord:
     attributes:
+      board:
+        name: 名前
+        title: タイトル
+        body: 本文
       user:
-        name: 'ユーザー名'
-        password: 'パスワード'
-        password_confirmation: 'パスワード（確認）'
+        name: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード（確認）
   views:
     pagination:
-      first: '最初'
-      last: '最後'
-      previous: '前'
-      next: '次'
-      truncate: '...'
+      first: 最初
+      last: 最後
+      previous: 前
+      next: 次
+      truncate: ...
